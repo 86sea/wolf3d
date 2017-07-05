@@ -2,15 +2,15 @@
 # define WOLF3D_H
 # include <math.h>
 # include <string.h>
-# include <mlx.h>
+# include "mlx.h"
 # include <stdio.h>
 # define WINHEIGHT 200
 # define WINWIDTH 320
 # define FOV 60
-# define MAPW 5;
-# define MAPH 5;
-# define GRIDH 64;
-# define GRIDW 64;
+# define MAPW 5
+# define MAPH 5
+# define GRIDH 64
+# define GRIDW 64
 
 typedef struct	s_mlx
 {
@@ -41,4 +41,6 @@ typedef struct	s_line
 	int			x1;
 	int			y1;
 }				t_line;
+int		line_dst(t_player p, t_inter B, int ray);
+void	line(t_mlx m, t_line n, int color);
 #endif

@@ -4,14 +4,30 @@
 # include <string.h>
 # include <mlx.h>
 # include <stdio.h>
-# define mapWidth 24
-# define mapHieght 24
+# define WINHEIGHT 200
+# define WINWIDTH 320
+# define FOV 60
+# define MAPW 5;
+# define MAPH 5;
+# define GRIDH 64;
+# define GRIDW 64;
 
 typedef struct	s_mlx
 {
 	void		*mlx;
 	void		*win;
 }				t_mlx;
+typedef struct s_player
+{
+	int			x;
+	int			y;
+	int			view;
+}				t_player;
+typedef struct s_inter
+{
+	int			x;
+	int			y;
+}				t_inter;
 typedef struct	s_line
 {
 	int			dx;

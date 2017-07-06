@@ -34,13 +34,19 @@ void      line(t_mlx m, t_line n, int color)
 int		line_dst(t_player p, t_inter B, int ray)
 {
 	int dst;
+	int alpha;
 
-	dst = ft_abs(p.x - B.x) / cos(ray); //distorted
-	dst *= cos(ray - p.view);			//fixed dist
+	alpha = ft_abs(ray - p.view);
+	printf("p.x#%d\n", p.x);
+	printf("b.x#%d\n", B.x);
+	printf("ray#%d\n", ray);
+	dst = ft_abs(p.x - B.x) / cos(alpha); //distorted
+	dst *= cos(alpha);			//fixed dist
+	printf("dst#%d\n", dst);
 	return (dst);
 }
 
-t_inter find_h_hit(int ray, t_player p, int **map)
+t_inter find_h_hit(int ray, t_player p, int map[][MAPH])
 {
 	int h;
 	t_inter A;
@@ -74,7 +80,7 @@ t_inter find_h_hit(int ray, t_player p, int **map)
 	return (A);
 }
 
-t_inter find_v_hit(int ray, t_player p, int **map)
+t_inter find_v_hit(int ray, t_player p, int map[][MAPH])
 {
 	int h;
 	t_inter A;
@@ -117,7 +123,7 @@ int		main(void)
 	{
 	{1, 1, 1, 1, 1},
 	{1, 0, 0, 0, 1},
-	{1, 0, 1, 0, 1},
+	{1, 0, 0, 0, 1},
 	{1, 0, 0, 0, 1},
 	{1, 1, 1, 1, 1}
 	};
@@ -140,17 +146,16 @@ int		main(void)
 	p.y = 64 * 5 - 32;
 	p.view = 90;
 	m.mlx = mlx_init();
-	m.win = mlx_new_window(m.mlx, WINHEIGHT, WINWIDTH, "wolf3D");
+	m.win = mlx_new_window(m.mlx, WINWIDTH, WINHEIGHT , "wolf3D");
   	planedst = (WINWIDTH / tan(FOV/2));
 	rayangle = WINWIDTH / FOV;
-	ray = p.view - (FOV / 2);
+	ray = p.view + (FOV / 2);
 
 
 	color = 0x00FFFFFF;
 	slice_width	= rayangle;
 
-	slice_height = GRIDH;
-	while (ray < (FOV / 2 + p.view))
+	while (ray > ((p.view - (FOV /2))))
 	{
 		slice.x0 = 1; 			//collumn
 		slice.x1 = slice.x0;
@@ -168,8 +173,8 @@ int		main(void)
 			wall = hv;
 			walldst = dv;
 		}
-		slice_height = slice_height/walldst * planedst;
-		slice.y0 = (WINHEIGHT / 2) - (slice_height / 2); //slice_start
+		slice_height = (64/walldst) * planedst;
+		slice.y0 = (WINHEIGHT / 2) - (slice_height); //slice_start
 		slice.y1 = slice.x0 + slice_height;
 		k  = 0;
 		while (k < slice_width)
@@ -178,8 +183,9 @@ int		main(void)
 			slice.x0++;
 			k++;
 		}
+		ray -= rayangle;
 	}
-	ray += rayangle;	
+		
 	mlx_loop(m.mlx);
 
 	return (0);

@@ -4,6 +4,7 @@
 # include <string.h>
 # include "mlx.h"
 # include <stdio.h>
+# include "../libft/libft.h"
 # define WINHEIGHT 200
 # define WINWIDTH 320
 # define FOV 60

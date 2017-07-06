@@ -8,8 +8,8 @@
 # define WINHEIGHT 200
 # define WINWIDTH 320
 # define FOV 60
-# define MAPW 5
-# define MAPH 5
+# define MAPW 30
+# define MAPH 30
 # define GRIDH 64
 # define GRIDW 64
 

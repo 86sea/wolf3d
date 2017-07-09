@@ -1,6 +1,7 @@
 #include "mlx.h"
 #include "wolf3d.h"
 #include "../libft/libft.h"
+#include <math.h>
 
 
 void      line(t_mlx m, t_line n, int color)
@@ -48,33 +49,38 @@ t_inter find_h_hit(int ray, t_player p, int map[][MAPH])
 	t_inter A;
 	double Xa;
 	double Ya;
-
+	double alpha;
 	h = 0;
+	alpha = 1;
 	if (ray > 0 && ray < 180)
-	{
-		A.y = ((p.y / 64) * 64) - 1;
-		Ya = 64;
-	}
-	else
-	{
-		A.y = ((p.y / 64) * 64) + 64;
-		Ya = -64;
-	}
-	printf("# tan(ray) %f\n", tan(ray));
-	Xa = 30;
-	printf("tan 60 %f\n", tan(60));
-	A.x = 100;//(p.x + (p.y - A.y) / (double)tan(ray));
-	printf("p.x %d\n", p.x);
-	printf("p.y %d\n", p.y);//tan(ray);
-	printf("A.y %d\n", A.y);//tan(ray);
-	printf("p.y - A.y %d\n", p.y - A.y);
+		{
+			A.y = ((p.y / 64) * 64) - 1;
+			Ya = 64;
+		}
+		else
+		{
+			A.y = ((p.y / 64) * 64) + 64;
+			Ya = -64;
+		}
 	while (h == 0)
 	{
+
+		if (ray != 90 && ray != 270)
+		{
+		alpha = (ray * (M_PI / 180));
+		alpha = tan(alpha);
+		}
+		A.x = p.x + (p.y - A.y) / alpha;
+		Xa = 64/alpha;
 		A.x = floor(A.x / 64);
 		A.y = floor(A.y / 64);
 		if (map[A.x][A.y] != 0)
 		{
 			h = 1;
+			ft_putnbr(A.x);
+			ft_putchar(' ');
+			ft_putnbr(A.y);
+			ft_putchar(' ');
 			A.x = A.x * 64;
 			A.y = A.y * 64;
 			break ;
@@ -93,8 +99,9 @@ t_inter find_v_hit(int ray, t_player p, int map[][MAPH])
 	t_inter A;
 	int Xa;
 	int Ya;
+	double alpha;
 
-
+	alpha = 1;
 	h = 0;
 	if (ray < 90 || ray > 270)
 	{
@@ -106,24 +113,24 @@ t_inter find_v_hit(int ray, t_player p, int map[][MAPH])
 		A.x = ((p.x / 64) * 64) - 1;
 		Xa = -64;
 	}
-
-	Ya = 64 * tan(ray);
-	A.y = p.y + (p.x - A.x) * tan(ray);
 	while (h == 0)
 	{
-			//	printf("A.x %d\n", A.x);
-	//	printf("A.y %d\n", A.y);
+		if (ray != 90 && ray != 270)
+		{
+		alpha = (ray * (M_PI / 180));
+		alpha = tan(alpha);
+		}
+		Ya = 64 * alpha;
+		A.y = p.y + (p.x - A.x) * alpha;
 		A.x = floor(A.x / 64);
 		A.y = floor(A.y / 64);
 		if (map[A.x][A.y] != 0)
 		{
 			h = 1;
-		//	printf("adf");
 			A.x = A.x * 64;
 			A.y = A.y * 64;
 			break ;
-		}
-	//	printf("adfad");
+		 }
 		A.x = A.x * 64;
 		A.y = A.y * 64;
 		A.x += Xa;
@@ -144,11 +151,11 @@ int		main(void)
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,3,0,3,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,3,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,3,0,3,0,0,0,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -181,8 +188,8 @@ int		main(void)
 	int walldst;
 	int start;
 
-	p.x = (64 * 7);
-	p.y = (64 * 15);
+	p.x = 200;
+	p.y = 200;
 	p.view = 90;
 	m.mlx = mlx_init();
 	m.win = mlx_new_window(m.mlx, WINWIDTH, WINHEIGHT , "wolf3D");
@@ -195,31 +202,27 @@ int		main(void)
 	slice_width	= rayangle;
 		slice.x0 = 0; 			//collumn
 		slice.x1 = slice.x0;
-	while (slice.x0 < WINWIDTH)
+	while (slice.x0 < WINWIDTH && ray >= p.view - FOV / 2)
 	{
 
 		hh = find_h_hit(ray, p, map);
-		hv = find_v_hit(ray, p, map);
+		//hv = find_v_hit(ray, p, map);
 		//hh = hv;
 		dh = line_dst(p, hh, ray);
-		dv = line_dst(p, hv, ray);
-		if (dh < dv)
-		{
+	//	dv = 10;//line_dst(p, hv, ray);
+		//if (dh < dv)
+		//{
 			wall = hh;
 			walldst = dh;
-		}
-		else
-		{
-			wall = hv;
-			walldst = dv;
-		}
+		//}
+		//else
+		//{
+		//	wall = hv;
+		//	walldst = dv;
+		//}
 		slice_height = (64/walldst) * 277;
 		slice.y0 = (WINHEIGHT / 2) - (slice_height); //slice_start
 		slice.y1 = slice.x0 + slice_height;
-	//	printf("# walldst %d\n", walldst);
-	////	printf("# slice_height %d\n", slice_height);
-	//	printf("# slice.y0 %d\n", slice.y0);
-	//	printf("# slice.y1 %d\n", slice.y1);
 		k  = 0;
 		while (k < slice_width)
 		{

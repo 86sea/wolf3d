@@ -21,11 +21,7 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <cmath>
-#include <string>
-#include <vector>
-#include <iostream>
-
+#include "wolf3d.h"
 //#include "quickcg.h"
 
 /*
@@ -37,6 +33,33 @@ g++ *.cpp -lSDL
 
 #define mapWidth 24
 #define mapHeight 24
+
+void      line(t_mlx m, t_line n, int color)
+{
+  n.dx = ft_abs(n.x1 - n.x0);
+  n.sx = n.x0 < n.x1 ? 1 : -1;
+  n.dy = ft_abs(n.y1 - n.y0);
+  n.sy = n.y0 < n.y1 ? 1 : -1;
+  n.err = (n.dx > n.dy ? n.dx : -n.dy) / 2;
+  while (1)
+  {
+    if (n.x0 == n.x1 && n.y0 == n.y1)
+      break ;
+    n.e2 = n.err;
+    if (n.e2 > -n.dx)
+    {
+      n.err -= n.dy;
+      n.x0 += n.sx;
+    }
+    if (n.e2 < n.dy)
+    {
+      n.err += n.dx;
+      n.y0 += n.sy;
+    }
+   // rotate(m, n.x0, n.y0, color);
+    mlx_pixel_put(m.mlx, m.win, n.x1, n.y1, color);
+  }
+}
 
 int worldMap[mapWidth][mapHeight]=
 {
@@ -66,20 +89,19 @@ int worldMap[mapWidth][mapHeight]=
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
-int main(int /*argc*/, char */*argv*/[])
+int main(void)
 {
   double posX = 22, posY = 12;  //x and y start position
   double dirX = -1, dirY = 0; //initial direction vector
   double planeX = 0, planeY = 0.66; //the 2d raycaster version of camera plane
-
-  double time = 0; //time of current frame
-  double oldTime = 0; //time of previous frame
-
-  screen(512, 384, 0, "Raycaster");
-  while(!done())
-  {
-    h = 512;
-    w = 384;
+  t_mlx m;
+  t_line n;
+//  double time = 0; //time of current frame
+  //double oldTime = 0; //time of previous frame
+	m.mlx = mlx_init();
+	m.win = mlx_new_window(m.mlx, 512, 384, "Raycaster");
+    int h = 512;
+    int w = 384;
     for(int x = 0; x < w; x++)
     {
       //calculate ray position and direction
@@ -175,10 +197,14 @@ int main(int /*argc*/, char */*argv*/[])
       if (side == 1) {color = color / 2;}
 
       //draw the pixels of the stripe as a vertical line
-      verLine(x, drawStart, drawEnd, color);
-    }
+      n.x0 = x;
+      n.x1 = x;
+      n.y0 = drawStart;
+      n.y1 = drawEnd;
+      line(m, n, color);
+      mlx_loop(m.mlx);
     //timing for input and FPS counter
-    oldTime = time;
+   /* oldTime = time;
     time = getTicks();
     double frameTime = (time - oldTime) / 1000.0; //frameTime is the time this frame has taken, in seconds
     print(1.0 / frameTime); //FPS counter
@@ -222,6 +248,6 @@ int main(int /*argc*/, char */*argv*/[])
       double oldPlaneX = planeX;
       planeX = planeX * cos(rotSpeed) - planeY * sin(rotSpeed);
       planeY = oldPlaneX * sin(rotSpeed) + planeY * cos(rotSpeed);
-    }
+    }*/
   }
 }

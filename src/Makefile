@@ -1,6 +1,7 @@
 NAME = wolf3d
 
-SRC = wolf3d.c \
+SRC = main.c \
+	  draw.c \
 
 OBJ = ${SRC:c=o}
 

@@ -5,13 +5,9 @@
 # include "mlx.h"
 # include <stdio.h>
 # include "../libft/libft.h"
-# define WINHEIGHT 200
-# define WINWIDTH 320
-# define FOV 60
-# define MAPW 30
-# define MAPH 30
-# define GRIDH 64
-# define GRIDW 64
+# include <math.h>
+# define mapWidth 24
+# define mapHeight 24
 
 typedef struct	s_mlx
 {

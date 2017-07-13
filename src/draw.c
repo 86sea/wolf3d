@@ -12,30 +12,12 @@
 
 #include "wolf3d.h"
 
-int worldMap[mapWidth][mapHeight]=
+	int worldMap[mapHeight][mapWidth]=
 {
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,1,2,3,4,0,0,1,0,1,1,1,1,1,0,0,0,0,0,0,0,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
@@ -143,56 +125,7 @@ void	ft_draw(t_draw d)
 			mlx_pixel_put(d.m.mlx, d.m.win, d.x, g, 0x00555555);
 			g--;
 		}
-
 		d.x++;
-    //FLOOR CASTING
-		double floorXWall, floorYWall; //x, y position of the floor texel at the bottom of the wall
-		double wallX; //where exactly the wall was hit
-		if (d.side == 0) 
-		wallX = d.rayPosY + d.perpWallDist * d.rayDirY;
-		else
-			wallX = d.rayPosX + d.perpWallDist * d.rayDirX;
-		wallX -= floor((wallX));
-      //4 different wall directions possible
-      if(d.side == 0 && d.rayDirX > 0)
-      {
-        floorXWall = d.mapX;
-        floorYWall = d.mapY + wallX;
-      }
-      else if(d.side == 0 && d.rayDirX < 0)
-      {
-        floorXWall = d.mapX + 1.0;
-        floorYWall = d.mapY + wallX;
-      }
-      else if(d.side == 1 && d.rayDirY > 0)
-      {
-        floorXWall = d.mapX + wallX;
-        floorYWall = d.mapY;
-      }
-      else
-      {
-        floorXWall = d.mapX + wallX;
-        floorYWall = d.mapY + 1.0;
-      }
-
-      double distWall, distPlayer, currentDist, weight, currentFloorX, currentFloorY;
-
-      distWall = d.perpWallDist;
-      distPlayer = 0.0;
-
-      if (d.drawEnd < 0) d.drawEnd = d.h; //becomes < 0 when the integer overflows
-
-      //draw the floor from drawEnd to the bottom of the screen
-      for(int y = d.drawEnd + 1; y < d.h; y++)
-      {
-        currentDist = d.h / (2.0 * y - d.h); //you could make a small lookup table for this instead
-
-        weight = (currentDist - distPlayer) / (distWall - distPlayer);
-
-       currentFloorX = weight * floorXWall + (1.0 - weight) * d.posX;
-       currentFloorY = weight * floorYWall + (1.0 - weight) * d.posY;
-
-        //mlx_pixel_put(d.m.mlx, d.m.win, currentFloorX, currentFloorY, 0x00AAAAAA);
-      }
+		
 	}
 }

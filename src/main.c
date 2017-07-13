@@ -12,57 +12,45 @@
 
 #include "wolf3d.h"
 #include "../libft/libft.h"
-
+#include <stdio.h>
+void	test(void)
+{
+	printf("test\n");
+}
 int		keypress(int keycode, void *d)
 {
-	t_main *temp;
-int worldMap[mapWidth][mapHeight]=
+const int worldMap[mapHeight][mapWidth]=
 {
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,1,2,3,4,0,0,1,0,1,1,1,1,1,0,0,0,0,0,0,0,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
+	t_main *temp;
+	ft_putnbr(keycode);
+	test();
+
 	temp = (t_main *)d;
-	double oldDirX;
+	double 8+976=`;
 	double oldPlaneX;
 	double rotSpeed = 0.5;
 	double moveSpeed = 0.5;
 	ft_putnbr(keycode);
 	ft_putchar('\n');
-	if (keycode == 53)
+	if (keycode == 65307)
 	{
 		mlx_destroy_window(temp->d.m.mlx, temp->d.m.win);
 		exit(0);
 	}
-	if (keycode == 13)
+	if (keycode == 119)
 	{
 		if (worldMap[(int)(temp->d.posX + temp->d.dirX * moveSpeed)][(int)(temp->d.posY)] == 0)
 			temp->d.posX += temp->d.dirX * moveSpeed;
 		if (worldMap[(int)(temp->d.posX)][(int)(temp->d.posY + temp->d.dirY * moveSpeed)] == 0)
 			temp->d.posY += temp->d.dirY * moveSpeed;
 	}
-	if (keycode == 1)
+	if (keycode == 115)
 	{
 		if (worldMap[(int)(temp->d.posX - temp->d.dirX * moveSpeed)][(int)(temp->d.posY)] == 0) 
 		temp->d.posX -= temp->d.dirX * moveSpeed;
@@ -70,7 +58,7 @@ int worldMap[mapWidth][mapHeight]=
 		temp->d.posY -= temp->d.dirY * moveSpeed;
 	}
     //rotate to the right
-    if (keycode == 2)
+    if (keycode == 100)
     {
       //both camera direction and camera plane must be rotated
       oldDirX = temp->d.dirX;
@@ -81,7 +69,7 @@ int worldMap[mapWidth][mapHeight]=
       temp->d.planeY = oldPlaneX * sin(-rotSpeed) + temp->d.planeY * cos(-rotSpeed);
     }
     //rotate to the left
-	if (keycode == 0)
+	if (keycode == 97)
 	{
       //both camera direction and camera plane must be rotated
 		oldDirX = temp->d.dirX;
@@ -98,8 +86,15 @@ int worldMap[mapWidth][mapHeight]=
 
 t_draw ft_init(t_draw d)
 {
-	d.posX = 22;
-	d.posY = 12;  //d.x and y start position
+	int endian;
+	int bits;
+	int size_line;
+
+	size_line = 384;
+	bits = 32;
+	endian = 1;
+	d.posX = 2;
+	d.posY = 2;  //d.x and y start position
 	d.dirX = -1,
 	d.dirY = 0;
 	d.planeX = 0;
@@ -108,7 +103,9 @@ t_draw ft_init(t_draw d)
 	d.h = 512;
 	d.w = 384;
 	d.m.mlx = mlx_init();
-	d.m.win = mlx_new_window(d.m.mlx, 512, 384, "Raycaster");
+	d.m.win = mlx_new_window(d.m.mlx, 384, 512, "Raycaster");
+	d.img = mlx_new_image(d.m.mlx, 384, 512);
+	d.frame = mlx_get_data_addr(d.img, &bits, &size_line, &endian);
 	return (d);
 }
 int main(void)

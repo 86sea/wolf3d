@@ -13,13 +13,10 @@
 #include "wolf3d.h"
 #include "../libft/libft.h"
 #include <stdio.h>
-void	test(void)
-{
-	printf("test\n");
-}
+
 int		keypress(int keycode, void *d)
 {
-int worldMap[mapHeight][mapWidth]=
+int worldMap[mapHeight][mapWidth] =
 {
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -28,22 +25,20 @@ int worldMap[mapHeight][mapWidth]=
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 	t_main *temp;
-	ft_putnbr(keycode);
 
 	temp = (t_main *)d;
 	ft_putnbr(keycode);
 	ft_putchar('\n');
 	if (keycode == 65307)
 	{
-		mlx_destroy_window(temp->d.m.mlx, temp->d.m.win);
-		exit(0);
+		ft_exit(temp);
 	}
 	if (keycode == FOWARD)
 		move_foward(temp, worldMap);
 	if (keycode == BACKWARD)
 		move_backward(temp, worldMap);
-    if (keycode == LOOK_RIGHT)
-    	turn_right(temp, worldMap);
+	if (keycode == LOOK_RIGHT)
+		turn_right(temp, worldMap);
 	if (keycode == 97)
 		turn_left(temp, worldMap);
 	mlx_clear_window(temp->d.m.mlx, temp->d.m.win);
@@ -51,15 +46,12 @@ int worldMap[mapHeight][mapWidth]=
 	return (0);
 }
 
-t_draw ft_init(t_draw d)
-{
-	int endian;
-	int bits;
-	int size_line;
+void	ft_init_map(t_draw *d)
+{}
+t_draw	ft_init(t_draw d)
+{	
 
-	size_line = 384;
-	bits = 32;
-	endian = 1;
+	ft_read("map.txt", &d);
 	d.posX = 2;
 	d.posY = 2;  //d.x and y start position
 	d.dirX = -1,
@@ -73,7 +65,7 @@ t_draw ft_init(t_draw d)
 	d.m.win = mlx_new_window(d.m.mlx, 384, 512, "Raycaster");
 	return (d);
 }
-int main(void)
+int		main(void)
 {
 	t_main d;
 

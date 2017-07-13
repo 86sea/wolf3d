@@ -21,23 +21,40 @@
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
+t_draw	ft_draw_init(t_draw d)
+{
+	d.cameraX = 2 * d.x / (double)(d.w) - 1; 
+	d.rayPosX = d.posX;
+	d.rayPosY = d.posY;
+	d.rayDirX = d.dirX + d.planeX * d.cameraX;
+	d.rayDirY = d.dirY + d.planeY * d.cameraX;
+	d.mapX = (int)(d.rayPosX);
+	d.mapY = (int)(d.rayPosY);
+	d.deltaDistX = sqrt(1 + (d.rayDirY * d.rayDirY) / (d.rayDirX * d.rayDirX));
+	d.deltaDistY = sqrt(1 + (d.rayDirX * d.rayDirX) / (d.rayDirY * d.rayDirY));
+	d.hit = 0;
+}
+t_draw	ft_side_dst(t_draw d)
+{
+
+}
 void	ft_draw(t_draw d)
 {
+
 	while (d.x < d.w)
 	{
-	      //calculate ray position and direction
-		d.cameraX = 2 * d.x / (double)(d.w) - 1; //d.x-coordinate in camera space
-		d.rayPosX = d.posX;
-		d.rayPosY = d.posY;
-		d.rayDirX = d.dirX + d.planeX * d.cameraX;
-		d.rayDirY = d.dirY + d.planeY * d.cameraX;
-		      
-		d.mapX = (int)(d.rayPosX);
-		d.mapY = (int)(d.rayPosY);
-		d.deltaDistX = sqrt(1 + (d.rayDirY * d.rayDirY) / (d.rayDirX * d.rayDirX));
-		d.deltaDistY = sqrt(1 + (d.rayDirX * d.rayDirX) / (d.rayDirY * d.rayDirY));
-		d.hit = 0; 
+			d.cameraX = 2 * d.x / (double)(d.w) - 1; 
+	d.rayPosX = d.posX;
+	d.rayPosY = d.posY;
+	d.rayDirX = d.dirX + d.planeX * d.cameraX;
+	d.rayDirY = d.dirY + d.planeY * d.cameraX;
+	d.mapX = (int)(d.rayPosX);
+	d.mapY = (int)(d.rayPosY);
+	d.deltaDistX = sqrt(1 + (d.rayDirY * d.rayDirY) / (d.rayDirX * d.rayDirX));
+	d.deltaDistY = sqrt(1 + (d.rayDirX * d.rayDirX) / (d.rayDirY * d.rayDirY));
+	d.hit = 0;
 		//calculate step and initial sideDist
+		//d = ft_side_dst(d);
 		if (d.rayDirX < 0)
 		{
 			d.stepX = -1;
@@ -126,6 +143,5 @@ void	ft_draw(t_draw d)
 			g--;
 		}
 		d.x++;
-		
 	}
 }

@@ -19,7 +19,7 @@ void	test(void)
 }
 int		keypress(int keycode, void *d)
 {
-const int worldMap[mapHeight][mapWidth]=
+int worldMap[mapHeight][mapWidth]=
 {
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -29,13 +29,8 @@ const int worldMap[mapHeight][mapWidth]=
 };
 	t_main *temp;
 	ft_putnbr(keycode);
-	test();
 
 	temp = (t_main *)d;
-	double 8+976=`;
-	double oldPlaneX;
-	double rotSpeed = 0.5;
-	double moveSpeed = 0.5;
 	ft_putnbr(keycode);
 	ft_putchar('\n');
 	if (keycode == 65307)
@@ -43,45 +38,17 @@ const int worldMap[mapHeight][mapWidth]=
 		mlx_destroy_window(temp->d.m.mlx, temp->d.m.win);
 		exit(0);
 	}
-	if (keycode == 119)
-	{
-		if (worldMap[(int)(temp->d.posX + temp->d.dirX * moveSpeed)][(int)(temp->d.posY)] == 0)
-			temp->d.posX += temp->d.dirX * moveSpeed;
-		if (worldMap[(int)(temp->d.posX)][(int)(temp->d.posY + temp->d.dirY * moveSpeed)] == 0)
-			temp->d.posY += temp->d.dirY * moveSpeed;
-	}
-	if (keycode == 115)
-	{
-		if (worldMap[(int)(temp->d.posX - temp->d.dirX * moveSpeed)][(int)(temp->d.posY)] == 0) 
-		temp->d.posX -= temp->d.dirX * moveSpeed;
-		if (worldMap[(int)(temp->d.posX)][(int)(temp->d.posY - temp->d.dirY * moveSpeed)] == 0) 
-		temp->d.posY -= temp->d.dirY * moveSpeed;
-	}
-    //rotate to the right
-    if (keycode == 100)
-    {
-      //both camera direction and camera plane must be rotated
-      oldDirX = temp->d.dirX;
-      temp->d.dirX = temp->d.dirX * cos(-rotSpeed) - temp->d.dirY * sin(-rotSpeed);
-      temp->d.dirY = oldDirX * sin(-rotSpeed) + temp->d.dirY * cos(-rotSpeed);
-      oldPlaneX = temp->d.planeX;
-      temp->d.planeX = temp->d.planeX * cos(-rotSpeed) - temp->d.planeY * sin(-rotSpeed);
-      temp->d.planeY = oldPlaneX * sin(-rotSpeed) + temp->d.planeY * cos(-rotSpeed);
-    }
-    //rotate to the left
+	if (keycode == FOWARD)
+		move_foward(temp, worldMap);
+	if (keycode == BACKWARD)
+		move_backward(temp, worldMap);
+    if (keycode == LOOK_RIGHT)
+    	turn_right(temp, worldMap);
 	if (keycode == 97)
-	{
-      //both camera direction and camera plane must be rotated
-		oldDirX = temp->d.dirX;
-		temp->d.dirX = temp->d.dirX * cos(rotSpeed) - temp->d.dirY * sin(rotSpeed);
-		temp->d.dirY = oldDirX * sin(rotSpeed) + temp->d.dirY * cos(rotSpeed);
-		oldPlaneX = temp->d.planeX;
-		temp->d.planeX = temp->d.planeX * cos(rotSpeed) - temp->d.planeY * sin(rotSpeed);
-		temp->d.planeY = oldPlaneX * sin(rotSpeed) + temp->d.planeY * cos(rotSpeed);
-	}
+		turn_left(temp, worldMap);
 	mlx_clear_window(temp->d.m.mlx, temp->d.m.win);
 	ft_draw(temp->d);
-	return (keycode);
+	return (0);
 }
 
 t_draw ft_init(t_draw d)
@@ -104,8 +71,6 @@ t_draw ft_init(t_draw d)
 	d.w = 384;
 	d.m.mlx = mlx_init();
 	d.m.win = mlx_new_window(d.m.mlx, 384, 512, "Raycaster");
-	d.img = mlx_new_image(d.m.mlx, 384, 512);
-	d.frame = mlx_get_data_addr(d.img, &bits, &size_line, &endian);
 	return (d);
 }
 int main(void)

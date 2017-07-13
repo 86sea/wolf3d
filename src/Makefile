@@ -2,6 +2,7 @@ NAME = wolf3d
 
 SRC = main.c \
 	  draw.c \
+	  move.c \
 
 OBJ = ${SRC:c=o}
 

@@ -8,6 +8,13 @@
 # include <math.h>
 # define mapWidth 24
 # define mapHeight 5
+# define FOWARD 119
+# define BACKWARD 115
+# define LOOK_LEFT 97
+# define LOOK_RIGHT 100
+# define ESC 65307
+# define MOVE_SPEED 0.5
+# define TURN_SPEED 0.5
 
 typedef struct	s_mlx
 {
@@ -47,8 +54,6 @@ typedef struct s_draw
 	int			mapY;
 	int			color;
 	t_mlx		m;
-	void		*img;
-	char		*frame;
 }				t_draw;
 typedef struct s_main
 {
@@ -56,5 +61,11 @@ typedef struct s_main
 }				t_main;
 int		keypress(int keycode, void *m);
 void	ft_draw(t_draw d);
+void	move_foward(t_main *temp, int worldMap[mapHeight][mapWidth]);
+void	move_backward(t_main *temp, int worldMap[mapHeight][mapWidth]);
+void	turn_right(t_main *temp, int worldMap[mapHeight][mapWidth]);
+void	turn_left(t_main *temp, int worldMap[mapHeight][mapWidth]);
+t_draw	ft_draw_init(t_draw d);
+t_draw	ft_side_dst(t_draw d);
 
 #endif

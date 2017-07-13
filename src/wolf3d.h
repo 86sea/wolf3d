@@ -3,7 +3,6 @@
 # include <math.h>
 # include <string.h>
 # include "mlx.h"
-# include <stdio.h>
 # include "../libft/libft.h"
 # include "../libft/get_next_line.h"
 # include <math.h>
@@ -88,5 +87,5 @@ void	ft_dda(t_draw *d);
 void	ft_dist_corr(t_draw *d);
 void	ft_color(t_draw *d);
 void			ft_read(char *file, t_draw *d);
-void ft_exit(t_main *temp);
+void ft_exit(t_draw *d);
 #endif

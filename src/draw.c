@@ -85,7 +85,6 @@ void	ft_draw(t_draw d)
 		ft_side_dst(&d);
 		ft_dda(&d);
 		ft_dist_corr(&d);
-		//calculate lowest and highest pixel to fill in current stripe
 		d.drawStart = -d.lineHeight / 2 + d.h / 2;
 		if (d.drawStart < 0)
 			d.drawStart = 0;

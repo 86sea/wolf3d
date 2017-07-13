@@ -2,26 +2,26 @@
 
 void	ft_side_dst(t_draw *d)
 {
-		if (d->rayDirX < 0)
-		{
-			d->stepX = -1;
-			d->sideDistX = (d->rayPosX - d->mapX) * d->deltaDistX;
-		}
-		else
-		{
-			d->stepX = 1;
-			d->sideDistX = (d->mapX + 1.0 - d->rayPosX) * d->deltaDistX;
-		}
-		if (d->rayDirY < 0)
-		{
-			d->stepY = -1;
-			d->sideDistY = (d->rayPosY - d->mapY) * d->deltaDistY;
-		}
-		else
-		{
-			d->stepY = 1;
-			d->sideDistY = (d->mapY + 1.0 - d->rayPosY) * d->deltaDistY;
-		}
+	if (d->rayDirX < 0)
+	{
+		d->stepX = -1;
+		d->sideDistX = (d->rayPosX - d->mapX) * d->deltaDistX;
+	}
+	else
+	{
+		d->stepX = 1;
+		d->sideDistX = (d->mapX + 1.0 - d->rayPosX) * d->deltaDistX;
+	}
+	if (d->rayDirY < 0)
+	{
+		d->stepY = -1;
+		d->sideDistY = (d->rayPosY - d->mapY) * d->deltaDistY;
+	}
+	else
+	{
+		d->stepY = 1;
+		d->sideDistY = (d->mapY + 1.0 - d->rayPosY) * d->deltaDistY;
+	}
 }
 
 void	ft_dda(t_draw *d)

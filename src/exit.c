@@ -1,19 +1,16 @@
 #include "wolf3d.h"
 
-void ft_exit(t_main *temp)
+void ft_exit(t_draw *d)
 {
 	int i;
-	int *p;
 
-	p = NULL;
 	i = 0;
-	while (i < mapWidth)
+	while (i < mapHeight)
 	{
-		p = temp->d.map[i];
-		free(p);
+		free(d->map[i]);
 		i++;
 	}
-	//free(temp->d.map[i]);
-	mlx_destroy_window(temp->d.m.mlx, temp->d.m.win);
+	free(d->map);
+	mlx_destroy_window(d->m.mlx, d->m.win);
 	exit(0);
 }

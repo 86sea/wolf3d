@@ -27,19 +27,15 @@ int worldMap[mapHeight][mapWidth] =
 	t_main *temp;
 
 	temp = (t_main *)d;
-	ft_putnbr(keycode);
-	ft_putchar('\n');
-	if (keycode == 65307)
-	{
-		ft_exit(temp);
-	}
+	if (keycode == ESC)
+		ft_exit(&temp->d);
 	if (keycode == FOWARD)
 		move_foward(temp, worldMap);
 	if (keycode == BACKWARD)
 		move_backward(temp, worldMap);
 	if (keycode == LOOK_RIGHT)
 		turn_right(temp, worldMap);
-	if (keycode == 97)
+	if (keycode == LOOK_LEFT)
 		turn_left(temp, worldMap);
 	mlx_clear_window(temp->d.m.mlx, temp->d.m.win);
 	ft_draw(temp->d);
@@ -50,8 +46,6 @@ void	ft_init_map(t_draw *d)
 {}
 t_draw	ft_init(t_draw d)
 {	
-
-	ft_read("map.txt", &d);
 	d.posX = 2;
 	d.posY = 2;  //d.x and y start position
 	d.dirX = -1,
@@ -70,6 +64,7 @@ int		main(void)
 	t_main d;
 
 	d.d = ft_init(d.d);
+	ft_read("map.txt", &d.d);
 	ft_draw(d.d);
 	mlx_key_hook(d.d.m.win, keypress, &d);
 	mlx_loop(d.d.m.mlx);

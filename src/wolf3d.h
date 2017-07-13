@@ -65,7 +65,7 @@ void	move_foward(t_main *temp, int worldMap[mapHeight][mapWidth]);
 void	move_backward(t_main *temp, int worldMap[mapHeight][mapWidth]);
 void	turn_right(t_main *temp, int worldMap[mapHeight][mapWidth]);
 void	turn_left(t_main *temp, int worldMap[mapHeight][mapWidth]);
-t_draw	ft_draw_init(t_draw d);
-t_draw	ft_side_dst(t_draw d);
+t_draw	ft_draw_init(t_draw *d);
+t_draw	ft_side_dst(t_draw *d);
 
 #endif

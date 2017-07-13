@@ -21,60 +21,51 @@
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
-t_draw	ft_draw_init(t_draw d)
+t_draw	ft_draw_init(t_draw *d)
 {
-	d.cameraX = 2 * d.x / (double)(d.w) - 1; 
-	d.rayPosX = d.posX;
-	d.rayPosY = d.posY;
-	d.rayDirX = d.dirX + d.planeX * d.cameraX;
-	d.rayDirY = d.dirY + d.planeY * d.cameraX;
-	d.mapX = (int)(d.rayPosX);
-	d.mapY = (int)(d.rayPosY);
-	d.deltaDistX = sqrt(1 + (d.rayDirY * d.rayDirY) / (d.rayDirX * d.rayDirX));
-	d.deltaDistY = sqrt(1 + (d.rayDirX * d.rayDirX) / (d.rayDirY * d.rayDirY));
-	d.hit = 0;
+	d->cameraX = 2 * d->x / (double)(d->w) - 1; 
+	d->rayPosX = d->posX;
+	d->rayPosY = d->posY;
+	d->rayDirX = d->dirX + d->planeX * d->cameraX;
+	d->rayDirY = d->dirY + d->planeY * d->cameraX;
+	d->mapX = (int)(d->rayPosX);
+	d->mapY = (int)(d->rayPosY);
+	d->deltaDistX = sqrt(1 + (d->rayDirY * d->rayDirY) / (d->rayDirX * d->rayDirX));
+	d->deltaDistY = sqrt(1 + (d->rayDirX * d->rayDirX) / (d->rayDirY * d->rayDirY));
+	d->hit = 0;
 }
-t_draw	ft_side_dst(t_draw d)
+t_draw	ft_side_dst(t_draw *d)
 {
-
+		if (d->rayDirX < 0)
+		{
+			d->stepX = -1;
+			d->sideDistX = (d->rayPosX - d->mapX) * d->deltaDistX;
+		}
+		else
+		{
+			d->stepX = 1;
+			d->sideDistX = (d->mapX + 1.0 - d->rayPosX) * d->deltaDistX;
+		}
+		if (d->rayDirY < 0)
+		{
+			d->stepY = -1;
+			d->sideDistY = (d->rayPosY - d->mapY) * d->deltaDistY;
+		}
+		else
+		{
+			d->stepY = 1;
+			d->sideDistY = (d->mapY + 1.0 - d->rayPosY) * d->deltaDistY;
+		}
 }
 void	ft_draw(t_draw d)
 {
 
 	while (d.x < d.w)
 	{
-			d.cameraX = 2 * d.x / (double)(d.w) - 1; 
-	d.rayPosX = d.posX;
-	d.rayPosY = d.posY;
-	d.rayDirX = d.dirX + d.planeX * d.cameraX;
-	d.rayDirY = d.dirY + d.planeY * d.cameraX;
-	d.mapX = (int)(d.rayPosX);
-	d.mapY = (int)(d.rayPosY);
-	d.deltaDistX = sqrt(1 + (d.rayDirY * d.rayDirY) / (d.rayDirX * d.rayDirX));
-	d.deltaDistY = sqrt(1 + (d.rayDirX * d.rayDirX) / (d.rayDirY * d.rayDirY));
-	d.hit = 0;
+	ft_draw_init(&d);
 		//calculate step and initial sideDist
 		//d = ft_side_dst(d);
-		if (d.rayDirX < 0)
-		{
-			d.stepX = -1;
-			d.sideDistX = (d.rayPosX - d.mapX) * d.deltaDistX;
-		}
-		else
-		{
-			d.stepX = 1;
-			d.sideDistX = (d.mapX + 1.0 - d.rayPosX) * d.deltaDistX;
-		}
-		if (d.rayDirY < 0)
-		{
-			d.stepY = -1;
-			d.sideDistY = (d.rayPosY - d.mapY) * d.deltaDistY;
-		}
-		else
-		{
-			d.stepY = 1;
-			d.sideDistY = (d.mapY + 1.0 - d.rayPosY) * d.deltaDistY;
-		}
+	ft_side_dst(&d);
 	      //perform DDA
 		while (d.hit == 0)
 		{

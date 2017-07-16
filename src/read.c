@@ -9,9 +9,7 @@ static void	ft_read_count(char *file, t_read *r)
 	r->col_count = 0;
 	r->fd = open(file, O_RDONLY);
 	if (get_next_line(r->fd, &r->row));
-	{
-	r->row_count++;
-	}
+		r->row_count++;
 	while (r->row[r->col_count])
 	{
 		if (r->row[r->col_count] == 32)
@@ -33,8 +31,8 @@ void			ft_read(char *file, t_draw *d)
 {
 	t_read r;
 
-	r.j = 0;
 	r.i = 0;
+	r.j = 0;
 	ft_read_count(file, &r);
 	r.fd = open(file, O_RDONLY);
 	d->map = (int **)malloc(sizeof(int *) * (r.row_count + 1));
@@ -55,6 +53,5 @@ void			ft_read(char *file, t_draw *d)
 		free(r.split);
 		r.i++;
 	}
-
 	close(r.fd);
 }

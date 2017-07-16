@@ -28,33 +28,33 @@ typedef struct	s_mlx
 typedef struct s_draw
 {
 	double		posX;
-	double		posY; //x and y start position
-	double			dirX;
-	double		dirY; //initial direction vector
+	double		posY;
+	double		dirX;
+	double		dirY;
 	double		planeX;
 	double		planeY;
 	double		cameraX;
 	double		rayPosX;
 	double		rayPosY;
 	double		rayDirX;
-	double		rayDirY; //the 2d raycaster version of camera plane
-	double		sideDistX;  //length of ray from current position to next x or y-side
+	double		rayDirY;
+	double		sideDistX;
 	double		sideDistY;
-	double		deltaDistX; //length of ray from one x or y-side to next x or y-side
+	double		deltaDistX;
 	double		deltaDistY;
 	double		perpWallDist;
 	int			h;
 	int			w;
 	int			x;
-	int			stepX; //what direction to step in x or y-direction (either +1 or -1)
+	int			stepX;
 	int			stepY;
-	int			hit;  //was there a wall hit?
-	int			side; //was a NS or a EW wall hit?
-	int			lineHeight;       //Calculate height of line to draw on screen
+	int			hit;
+	int			side;
+	int			lineHeight;
 	int			drawStart;
 	int			drawEnd;
 	int			k;
-	int			mapX;			//which box of the map we're in
+	int			mapX;
 	int			mapY;
 	int			color;
 	t_mlx		m;
@@ -87,5 +87,6 @@ void	ft_dist_corr(t_draw *d);
 void	ft_color(t_draw *d);
 void	ft_read(char *file, t_draw *d);
 void	ft_init(t_draw *d);
-void ft_exit(t_draw *d);
+void 	ft_exit(t_draw *d);
+int		expose(void *d);
 #endif

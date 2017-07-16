@@ -44,6 +44,7 @@ void	ft_dda(t_draw *d)
 			d->hit = 1;
 	}
 }
+
 void	ft_dist_corr(t_draw *d)
 {
 	if (d->side == 0)

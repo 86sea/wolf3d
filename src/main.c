@@ -14,7 +14,7 @@
 #include "../libft/libft.h"
 #include <stdio.h>
 
-int		keypress(int keycode, void *d)
+int			keypress(int keycode, void *d)
 {
 	t_main *temp;
 
@@ -31,20 +31,23 @@ int		keypress(int keycode, void *d)
 		turn_left(temp);
 	mlx_clear_window(temp->d.m.mlx, temp->d.m.win);
 	ft_draw(temp->d);
-	return (0);
+	return (keycode);
 }
-static int	hook_close(t_mlx *mlx)
+
+int			expose(void *d)
 {
-	(void)mlx;
-	exit(EXIT_SUCCESS);
-	return (0);
+	t_main *temp;
+
+	temp = (t_main *)d;
+	mlx_clear_window(temp->d.m.mlx, temp->d.m.win);
+	ft_draw(temp->d);
+	ft_putnbr(1);
+	return (1);
 }
-void	ft_init_map(t_draw *d)
-{}
-void	ft_init(t_draw *d)
+void		ft_init(t_draw *d)
 {	
-	d->posX = 2;
-	d->posY = 3;  //d->x and y start position
+	d->posX = 5;
+	d->posY = 5;
 	d->dirX = -1,
 	d->dirY = 0;
 	d->planeX = 0;
@@ -55,13 +58,14 @@ void	ft_init(t_draw *d)
 	d->m.mlx = mlx_init();
 	d->m.win = mlx_new_window(d->m.mlx, 384, 512, "Raycaster");
 }
+
 int		main(void)
 {
 	t_main d;
 
 	ft_init(&d.d);
 	ft_read("map.txt", &d.d);
-	ft_draw(d.d);
+	mlx_expose_hook(d.d.m.mlx, expose, &d);
 	mlx_key_hook(d.d.m.win, keypress, &d);
 	mlx_loop(d.d.m.mlx);
 	return (0);

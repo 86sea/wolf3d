@@ -14,7 +14,12 @@
 # define LIBFT_H
 
 # include <stdlib.h>
-
+typedef struct	s_list
+{
+	void			*content;
+	size_t			content_size;
+	struct s_list	*next;
+}				t_list;
 int		ft_strlen(const char *str);
 char	*ft_strdup(const char *str);
 char	*ft_strcat(char *s1, const char *s2);
@@ -68,5 +73,9 @@ void	ft_putendl_fd(char const *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int		ft_abs(int num);
+t_list	*ft_lstnew(void const *content, size_t content_size);
+void	ft_lstadd(t_list **alst, t_list *new);
+char	*ft_strmerge(char *a, char *b);
+
 
 #endif

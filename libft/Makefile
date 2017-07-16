@@ -22,7 +22,7 @@ SRC = ft_strlen.c ft_strdup.c ft_strcat.c ft_strstr.c ft_strlcat.c ft_strnstr.c 
 	ft_strmapi.c ft_strequ.c ft_strnequ.c ft_strsub.c ft_strjoin.c \
 	ft_strtrim.c ft_strsplit.c ft_itoa.c ft_putchar.c ft_putstr.c ft_putendl.c \
 	ft_putnbr.c	ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
-	get_next_line.c ft_abs.c
+	get_next_line.c ft_abs.c ft_lstnew.c ft_lstadd.c ft_strmerge.c
 
 COMPILED_FT = ${SRC:c=o}
 

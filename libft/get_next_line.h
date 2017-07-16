@@ -3,17 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: syoung <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/12 07:20:32 by syoung            #+#    #+#             */
-/*   Updated: 2017/06/22 11:23:20 by syoung           ###   ########.fr       */
+/*   Created: 2016/02/16 19:11:56 by pbondoer          #+#    #+#             */
+/*   Updated: 2016/02/24 13:08:52 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFF_SIZE 10000000
+# define BUFF_SIZE 4096
 
-int		get_next_line(const int fd, char **line);
-
+typedef struct	s_gnl
+{
+	char		*buf;
+	int			count;
+	int			i;
+	int			nl;
+	int			fd;
+}				t_gnl;
+int				get_next_line(int const fd, char **line);
 #endif

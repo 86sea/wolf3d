@@ -34,8 +34,9 @@ void			ft_read(char *file, t_draw *d)
 			free(r.split[r.j]);
 			r.j++;
 		}
+		free(r.split);
 		r.i++;
 	}
-	free(r.split);
+
 	close(r.fd);
 }

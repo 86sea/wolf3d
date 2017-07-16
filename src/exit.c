@@ -10,6 +10,7 @@ void ft_exit(t_draw *d)
 		free(d->map[i]);
 		i++;
 	}
+	ft_putnbr(i);
 	free(d->map);*/
 	mlx_destroy_window(d->m.mlx, d->m.win);
 	exit(0);

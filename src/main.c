@@ -49,30 +49,39 @@ static int	hook_close(t_mlx *mlx)
 }
 void	ft_init_map(t_draw *d)
 {}
-t_draw	ft_init(t_draw d)
+void	ft_init(t_draw *d)
 {	
-	d.posX = 2;
-	d.posY = 2;  //d.x and y start position
-	d.dirX = -1,
-	d.dirY = 0;
-	d.planeX = 0;
-	d.planeY = 0.66; 
-	d.x = 0;
-	d.h = 512;
-	d.w = 384;
-	d.m.mlx = mlx_init();
-	d.m.win = mlx_new_window(d.m.mlx, 384, 512, "Raycaster");
-	return (d);
+	d->posX = 2;
+	d->posY = 2;  //d->x and y start position
+	d->dirX = -1,
+	d->dirY = 0;
+	d->planeX = 0;
+	d->planeY = 0.66; 
+	d->x = 0;
+	d->h = 512;
+	d->w = 384;
+	d->m.mlx = mlx_init();
+	d->m.win = mlx_new_window(d->m.mlx, 384, 512, "Raycaster");
+	//return (d);
 }
 int		main(void)
 {
 	t_main d;
 
-	d.d = ft_init(d.d);
+	ft_init(&d.d);
 	ft_read("map.txt", &d.d);
+		int i;
+
+	i = 0;
+	while (i < mapHeight)
+	{
+		free(d.d.map[i]);
+		i++;
+	}
+	ft_putnbr(i);
+	free(d.d.map);
 	ft_draw(d.d);
 	mlx_key_hook(d.d.m.win, keypress, &d);
-	mlx_hook(d.d.m.win, 17, (1L<<0), hook_close, &d.d.m);
 	mlx_loop(d.d.m.mlx);
 	return (0);
 }

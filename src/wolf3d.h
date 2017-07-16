@@ -86,6 +86,7 @@ void	ft_side_dst(t_draw *d);
 void	ft_dda(t_draw *d);
 void	ft_dist_corr(t_draw *d);
 void	ft_color(t_draw *d);
-void			ft_read(char *file, t_draw *d);
+void	ft_read(char *file, t_draw *d);
+void	ft_init(t_draw *d);
 void ft_exit(t_draw *d);
 #endif

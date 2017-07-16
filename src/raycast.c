@@ -26,14 +26,6 @@ void	ft_side_dst(t_draw *d)
 
 void	ft_dda(t_draw *d)
 {
-	int worldMap[mapHeight][mapWidth]=
-{
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,1,2,3,4,0,0,1,0,1,1,1,1,1,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-};
 	while (d->hit == 0)
 	{
 		if (d->sideDistX < d->sideDistY)
@@ -48,7 +40,7 @@ void	ft_dda(t_draw *d)
 			d->mapY += d->stepY;
 			d->side = 1;
 		}
-		if (worldMap[d->mapX][d->mapY] > 0)
+		if (d->map[d->mapX][d->mapY] > 0)
 			d->hit = 1;
 	}
 }

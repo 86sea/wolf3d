@@ -68,7 +68,6 @@ typedef	struct	s_read
 {
 	int			col_count;
 	int			row_count;
-	char		buff[1];
 	char		*row;
 	char		**split;
 	int			fd;

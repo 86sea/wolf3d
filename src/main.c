@@ -41,7 +41,12 @@ int worldMap[mapHeight][mapWidth] =
 	ft_draw(temp->d);
 	return (0);
 }
-
+static int	hook_close(t_mlx *mlx)
+{
+	(void)mlx;
+	exit(EXIT_SUCCESS);
+	return (0);
+}
 void	ft_init_map(t_draw *d)
 {}
 t_draw	ft_init(t_draw d)
@@ -67,6 +72,7 @@ int		main(void)
 	ft_read("map.txt", &d.d);
 	ft_draw(d.d);
 	mlx_key_hook(d.d.m.win, keypress, &d);
+	mlx_hook(d.d.m.win, 17, (1L<<0), hook_close, &d.d.m);
 	mlx_loop(d.d.m.mlx);
 	return (0);
 }

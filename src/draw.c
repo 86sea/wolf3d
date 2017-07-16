@@ -12,14 +12,6 @@
 
 #include "wolf3d.h"
 
-	int worldMap[mapHeight][mapWidth]=
-{
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,1,2,3,4,0,0,1,0,1,1,1,1,1,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-};
 
 void	ft_draw_init(t_draw *d)
 {
@@ -37,13 +29,13 @@ void	ft_draw_init(t_draw *d)
 
 void	ft_color(t_draw *d)
 {
-	if (worldMap[d->mapX][d->mapY] == 1)
+	if (d->map[d->mapX][d->mapY] == 1)
 		d->color = 0x00FF0000;
-	else if (worldMap[d->mapX][d->mapY] == 2)
+	else if (d->map[d->mapX][d->mapY] == 2)
 		d->color = 0x0000FF00;
-	else if (worldMap[d->mapX][d->mapY] == 3)
+	else if (d->map[d->mapX][d->mapY] == 3)
 		d->color = 0x000000FF;
-	else if (worldMap[d->mapX][d->mapY] == 4)
+	else if (d->map[d->mapX][d->mapY] == 4)
 		d->color = 0x00FFFFFF;
 	else
 		d->color = 0x00FFFF00;

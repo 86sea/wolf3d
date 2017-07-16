@@ -2,7 +2,7 @@
 
 void ft_exit(t_draw *d)
 {
-	/*int i;
+	int i;
 
 	i = 0;
 	while (i < mapHeight)
@@ -11,7 +11,7 @@ void ft_exit(t_draw *d)
 		i++;
 	}
 	ft_putnbr(i);
-	free(d->map);*/
+	free(d->map);
 	mlx_destroy_window(d->m.mlx, d->m.win);
 	exit(0);
 }

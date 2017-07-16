@@ -77,10 +77,10 @@ typedef	struct	s_read
 }				t_read;
 int		keypress(int keycode, void *m);
 void	ft_draw(t_draw d);
-void	move_foward(t_main *temp, int worldMap[mapHeight][mapWidth]);
-void	move_backward(t_main *temp, int worldMap[mapHeight][mapWidth]);
-void	turn_right(t_main *temp, int worldMap[mapHeight][mapWidth]);
-void	turn_left(t_main *temp, int worldMap[mapHeight][mapWidth]);
+void	move_foward(t_main *temp);
+void	move_backward(t_main *temp);
+void	turn_right(t_main *temp);
+void	turn_left(t_main *temp);
 void	ft_draw_init(t_draw *d);
 void	ft_side_dst(t_draw *d);
 void	ft_dda(t_draw *d);

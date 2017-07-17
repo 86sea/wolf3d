@@ -66,7 +66,7 @@ int			main(void)
 	ft_init(&d.d);
 	ft_read("map.txt", &d.d);
 	mlx_expose_hook(d.d.m.win, expose, &d.d);
-	mlx_hook(d.d.m.win, 2, (1L << 0 ), keypress, &d);
+	mlx_hook(d.d.m.win, 2, (1L << 0), keypress, &d);
 	mlx_hook(d.d.m.win, 17, 0L, ft_exit, &d.d);
 	mlx_loop(d.d.m.mlx);
 	return (0);

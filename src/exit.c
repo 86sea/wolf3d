@@ -6,7 +6,7 @@
 /*   By: syoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/17 07:07:52 by syoung            #+#    #+#             */
-/*   Updated: 2017/07/17 07:07:54 by syoung           ###   ########.fr       */
+/*   Updated: 2017/07/17 10:40:44 by syoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_exit(t_draw *d)
 	int i;
 
 	i = 0;
-	while (i < mapHeight)
+	while (i < MAP_HEIGHT)
 	{
 		free(d->map[i]);
 		i++;

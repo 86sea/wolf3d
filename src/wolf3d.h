@@ -30,6 +30,7 @@
 # define TURN_SPEED 0.5
 # define WIN_HEIGHT 100
 # define WIN_WIDTH 100
+# define MAP_HEIGHT 24
 
 typedef struct	s_mlx
 {
@@ -70,8 +71,6 @@ typedef struct	s_draw
 	int			color;
 	t_mlx		m;
 	int			**map;
-	void		*img;
-	char		*img_data;
 }				t_draw;
 typedef struct	s_main
 {
@@ -100,6 +99,6 @@ void			ft_dist_corr(t_draw *d);
 void			ft_color(t_draw *d);
 void			ft_read(char *file, t_draw *d);
 void			ft_init(t_draw *d);
-int			ft_exit(t_draw *d);
+int				ft_exit(t_draw *d);
 int				expose(void *d);
 #endif

@@ -31,7 +31,7 @@ int			keypress(int keycode, void *d)
 		turn_left(temp);
 	mlx_clear_window(temp->d.m.mlx, temp->d.m.win);
 	ft_draw(temp->d);
-	return (keycode);
+	return (0);
 }
 
 int			expose(void *d)
@@ -56,7 +56,8 @@ void		ft_init(t_draw *d)
 	d->h = WIN_HEIGHT;
 	d->w = WIN_WIDTH;
 	d->m.mlx = mlx_init();
-	d->m.win = mlx_new_window(d->m.mlx, WIN_WIDTH, WIN_HEIGHT, "Raycaster");
+	mlx_do_key_autorepeaton(d->m.mlx);
+	d->m.win = mlx_new_window(d->m.mlx, WIN_WIDTH, WIN_HEIGHT, "wolf3d");
 }
 
 int			main(void)

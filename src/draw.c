@@ -31,15 +31,15 @@ void	ft_draw_init(t_draw *d)
 void	ft_color(t_draw *d)
 {
 	if (d->map[d->mapx][d->mapy] == 1)
-		d->color = 0x00FF0000;
+		d->color = 0xe0ffff;
 	else if (d->map[d->mapx][d->mapy] == 2)
-		d->color = 0x0000FF00;
+		d->color = 0x8b;
 	else if (d->map[d->mapx][d->mapy] == 3)
-		d->color = 0x000000FF;
+		d->color = 0x90ee90;
 	else if (d->map[d->mapx][d->mapy] == 4)
-		d->color = 0x00FFFFFF;
+		d->color = 0xfaebd7;
 	else
-		d->color = 0x00FFFF00;
+		d->color = 0xffdab9;
 	if (d->side == 1)
 		d->color = d->color / 2;
 }
@@ -60,13 +60,13 @@ void	ft_draw_rays(t_draw *d)
 	i = d->k;
 	while (i < d->h)
 	{
-		mlx_pixel_put(d->m.mlx, d->m.win, d->x, i, 0x00AAAAAA);
+		mlx_pixel_put(d->m.mlx, d->m.win, d->x, i, 0xe5e5e5);
 		i++;
 	}
 	g = d->drawstart;
 	while (g > 0)
 	{
-		mlx_pixel_put(d->m.mlx, d->m.win, d->x, g, 0x00555555);
+		mlx_pixel_put(d->m.mlx, d->m.win, d->x, g, 0xa9a9a9);
 		g--;
 	}
 }

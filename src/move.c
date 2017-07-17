@@ -24,12 +24,12 @@ void	move_foward(t_main *temp)
 
 void	move_backward(t_main *temp)
 {
-	if (temp->d.map[(int)(temp->d.posx + temp->d.dirx
+	if (temp->d.map[(int)(temp->d.posx - temp->d.dirx
 		* MOVE_SPEED)][(int)(temp->d.posy)] == 0)
-		temp->d.posx += temp->d.dirx * MOVE_SPEED;
+		temp->d.posx -= temp->d.dirx * MOVE_SPEED;
 	if (temp->d.map[(int)(temp->d.posx)][(int)(temp->d.posy
-		+ temp->d.diry * MOVE_SPEED)] == 0)
-		temp->d.posy += temp->d.diry * MOVE_SPEED;
+		- temp->d.diry * MOVE_SPEED)] == 0)
+		temp->d.posy -= temp->d.diry * MOVE_SPEED;
 }
 
 void	turn_right(t_main *temp)

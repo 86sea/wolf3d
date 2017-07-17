@@ -28,8 +28,8 @@
 # define ESC 53
 # define MOVE_SPEED 0.5
 # define TURN_SPEED 0.5
-# define WIN_HEIGHT 200
-# define WIN_WIDTH 200
+# define WIN_HEIGHT 150
+# define WIN_WIDTH 150
 
 typedef struct	s_mlx
 {

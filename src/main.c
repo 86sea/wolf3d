@@ -56,7 +56,6 @@ void		ft_init(t_draw *d)
 	d->h = WIN_HEIGHT;
 	d->w = WIN_WIDTH;
 	d->m.mlx = mlx_init();
-	mlx_do_key_autorepeaton(d->m.mlx);
 	d->m.win = mlx_new_window(d->m.mlx, WIN_WIDTH, WIN_HEIGHT, "wolf3d");
 }
 
@@ -67,7 +66,8 @@ int			main(void)
 	ft_init(&d.d);
 	ft_read("map.txt", &d.d);
 	mlx_expose_hook(d.d.m.win, expose, &d.d);
-	mlx_key_hook(d.d.m.win, keypress, &d);
+	mlx_hook(d.d.m.win, 2, (1L << 0 ), keypress, &d);
+	mlx_hook(d.d.m.win, 17, 0L, ft_exit, &d.d);
 	mlx_loop(d.d.m.mlx);
 	return (0);
 }

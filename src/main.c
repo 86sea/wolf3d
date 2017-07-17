@@ -41,7 +41,6 @@ int			expose(void *d)
 	temp = (t_main *)d;
 	mlx_clear_window(temp->d.m.mlx, temp->d.m.win);
 	ft_draw(temp->d);
-	ft_putnbr(1);
 	return (1);
 }
 
@@ -66,6 +65,7 @@ int			main(void)
 
 	ft_init(&d.d);
 	ft_read("map.txt", &d.d);
+	mlx_expose_hook(d.d.m.win, expose, &d.d);
 	mlx_key_hook(d.d.m.win, keypress, &d);
 	mlx_loop(d.d.m.mlx);
 	return (0);

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: syoung <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/17 07:07:42 by syoung            #+#    #+#             */
+/*   Updated: 2017/07/17 07:07:43 by syoung           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 
-static void	ft_read_count(char *file, t_read *r)
+static void		ft_read_count(char *file, t_read *r)
 {
 	int space;
 
@@ -8,14 +20,13 @@ static void	ft_read_count(char *file, t_read *r)
 	r->row_count = 0;
 	r->col_count = 0;
 	r->fd = open(file, O_RDONLY);
-	if (get_next_line(r->fd, &r->row));
+	if (get_next_line(r->fd, &r->row))
 		r->row_count++;
 	while (r->row[r->col_count])
 	{
 		if (r->row[r->col_count] == 32)
 			space++;
 		r->col_count++;
-
 	}
 	free(r->row);
 	r->col_count -= space;
@@ -25,7 +36,7 @@ static void	ft_read_count(char *file, t_read *r)
 		free(r->row);
 	}
 	close(r->fd);
-} 
+}
 
 void			ft_read(char *file, t_draw *d)
 {

@@ -44,30 +44,29 @@ int			expose(void *d)
 	ft_putnbr(1);
 	return (1);
 }
+
 void		ft_init(t_draw *d)
-{	
-	d->posX = 5;
-	d->posY = 5;
-	d->dirX = -1,
-	d->dirY = 0;
-	d->planeX = 0;
-	d->planeY = 0.66; 
+{
+	d->posx = 5;
+	d->posy = 5;
+	d->dirx = -1;
+	d->diry = 0;
+	d->planex = 0;
+	d->planey = 0.66;
 	d->x = 0;
-	d->h = 512;
-	d->w = 384;
+	d->h = WIN_HEIGHT;
+	d->w = WIN_WIDTH;
 	d->m.mlx = mlx_init();
-	d->m.win = mlx_new_window(d->m.mlx, 384, 512, "Raycaster");
+	d->m.win = mlx_new_window(d->m.mlx, WIN_WIDTH, WIN_HEIGHT, "Raycaster");
 }
 
-int		main(void)
+int			main(void)
 {
 	t_main d;
 
 	ft_init(&d.d);
 	ft_read("map.txt", &d.d);
-	mlx_expose_hook(d.d.m.mlx, expose, &d);
 	mlx_key_hook(d.d.m.win, keypress, &d);
 	mlx_loop(d.d.m.mlx);
 	return (0);
 }
-

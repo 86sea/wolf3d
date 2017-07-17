@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: syoung <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/17 07:07:52 by syoung            #+#    #+#             */
+/*   Updated: 2017/07/17 07:07:54 by syoung           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 
-void ft_exit(t_draw *d)
+void	ft_exit(t_draw *d)
 {
-	int i;
+	/*int i;
 
 	i = 0;
 	while (i < mapHeight)
@@ -10,8 +22,7 @@ void ft_exit(t_draw *d)
 		free(d->map[i]);
 		i++;
 	}
-	ft_putnbr(i);
-	free(d->map);
+	free(d->map); */
 	mlx_destroy_window(d->m.mlx, d->m.win);
 	exit(0);
 }

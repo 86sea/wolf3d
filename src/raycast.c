@@ -1,26 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: syoung <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/17 07:11:16 by syoung            #+#    #+#             */
+/*   Updated: 2017/07/17 07:11:17 by syoung           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 
 void	ft_side_dst(t_draw *d)
 {
-	if (d->rayDirX < 0)
+	if (d->raydirx < 0)
 	{
-		d->stepX = -1;
-		d->sideDistX = (d->rayPosX - d->mapX) * d->deltaDistX;
+		d->stepx = -1;
+		d->sidedistx = (d->rayposx - d->mapx) * d->deltadistx;
 	}
 	else
 	{
-		d->stepX = 1;
-		d->sideDistX = (d->mapX + 1.0 - d->rayPosX) * d->deltaDistX;
+		d->stepx = 1;
+		d->sidedistx = (d->mapx + 1.0 - d->rayposx) * d->deltadistx;
 	}
-	if (d->rayDirY < 0)
+	if (d->raydiry < 0)
 	{
-		d->stepY = -1;
-		d->sideDistY = (d->rayPosY - d->mapY) * d->deltaDistY;
+		d->stepy = -1;
+		d->sidedisty = (d->rayposy - d->mapy) * d->deltadisty;
 	}
 	else
 	{
-		d->stepY = 1;
-		d->sideDistY = (d->mapY + 1.0 - d->rayPosY) * d->deltaDistY;
+		d->stepy = 1;
+		d->sidedisty = (d->mapy + 1.0 - d->rayposy) * d->deltadisty;
 	}
 }
 
@@ -28,19 +40,19 @@ void	ft_dda(t_draw *d)
 {
 	while (d->hit == 0)
 	{
-		if (d->sideDistX < d->sideDistY)
+		if (d->sidedistx < d->sidedisty)
 		{
-			d->sideDistX += d->deltaDistX;
-			d->mapX += d->stepX;
+			d->sidedistx += d->deltadistx;
+			d->mapx += d->stepx;
 			d->side = 0;
 		}
 		else
 		{
-			d->sideDistY += d->deltaDistY;
-			d->mapY += d->stepY;
+			d->sidedisty += d->deltadisty;
+			d->mapy += d->stepy;
 			d->side = 1;
 		}
-		if (d->map[d->mapX][d->mapY] > 0)
+		if (d->map[d->mapx][d->mapy] > 0)
 			d->hit = 1;
 	}
 }
@@ -48,8 +60,10 @@ void	ft_dda(t_draw *d)
 void	ft_dist_corr(t_draw *d)
 {
 	if (d->side == 0)
-		d->perpWallDist = (d->mapX - d->rayPosX + (1 - d->stepX) / 2) / d->rayDirX;
+		d->perpwalldist = (d->mapx - d->rayposx
+			+ (1 - d->stepx) / 2) / d->raydirx;
 	else
-		d->perpWallDist = (d->mapY - d->rayPosY + (1 - d->stepY) / 2) / d->rayDirY;
-	d->lineHeight = (int)(d->h / d->perpWallDist);
+		d->perpwalldist = (d->mapy - d->rayposy
+			+ (1 - d->stepy) / 2) / d->raydiry;
+	d->lineheight = (int)(d->h / d->perpwalldist);
 }
